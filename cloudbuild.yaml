@@ -1,7 +1,22 @@
-<!DOCTYPE html>
-<html>
-<body>
-    <h1>CI/CD Implementation Successful!</h1>
-    <p>Indha application GitHub-la irundhu automatic-ah deploy aagudhu.</p>
-</body>
-</html>
+steps:
+  # Step 1: index.html-ah VM-kku copy panradhu
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'compute'
+      - 'scp'
+      - 'index.html'
+      - 'my-web-server:/var/www/html/index.html'
+      - '--zone=us-central1-a'
+      - '--quiet'
+
+  # Step 2: Nginx server-ah restart panradhu
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'compute'
+      - 'ssh'
+      - 'my-web-server'
+      - '--zone=us-central1-a'
+      - '--command=sudo systemctl restart nginx'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
