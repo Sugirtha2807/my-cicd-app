@@ -5,7 +5,7 @@ steps:
       - 'compute'
       - 'scp'
       - 'index.html'
-      - 'my-web-server:/var/www/html/index.html'
+      - 'sugi-instance:/var/www/html/index.html'
       - '--zone=us-central1-a'
       - '--quiet'
 
@@ -14,7 +14,7 @@ steps:
     args:
       - 'compute'
       - 'ssh'
-      - 'my-web-server'
+      - 'sugi-instance'
       - '--zone=us-central1-a'
       - '--command=sudo systemctl restart nginx'
 
