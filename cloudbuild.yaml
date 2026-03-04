@@ -1,22 +1,10 @@
 steps:
-  # Step 1: index.html-ah VM-kku copy panradhu
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args:
-      - 'compute'
-      - 'scp'
-      - 'index.html'
-      - 'sugi-instance:/var/www/html/index.html'
-      - '--zone=us-central1-a'
-      - '--quiet'
+- name: 'gcr.io/cloud-builders/git'
+  args: ['clone', 'https://github.com/Sugirtha2807/my-cicd-app']
 
-  # Step 2: Nginx server-ah restart panradhu
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args:
-      - 'compute'
-      - 'ssh'
-      - 'sugi-instance'
-      - '--zone=us-central1-a'
-      - '--command=sudo systemctl restart nginx'
-
-options:
-  logging: CLOUD_LOGGING_ONLY
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+  - compute
+  - ssh
+  - instance-name
+  - --command= "cd project && git pull && npm install && npm start"
