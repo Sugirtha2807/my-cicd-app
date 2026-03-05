@@ -8,3 +8,5 @@ steps:
   - ssh
   - instance-name
   - --command= "cd project && git pull && npm install && npm start"
+  options:
+  logging: CLOUD_LOGGING_ONLY
