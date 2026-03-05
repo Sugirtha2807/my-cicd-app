@@ -1,3 +1,6 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
+
 steps:
 - name: 'gcr.io/cloud-builders/gcloud'
   args:
@@ -5,7 +8,4 @@ steps:
   - ssh
   - sugi-instance
   - --zone=us-central1-a
-  - --command="cd my-cicd-app && git pull && npm install && pm2 restart all"
-
-options:
-  logging: CLOUD_LOGGING_ONLY
+  - --command=cd ~ && rm -rf my-cicd-app && git clone https://github.com/sugirtha2807/my-cicd-app.git && sudo cp my-cicd-app/index.html /var/www/html/index.html
