@@ -6,7 +6,9 @@ steps:
   args:
   - compute
   - ssh
-  - instance-name
-  - --command= "cd project && git pull && npm install && npm start"
-  options:
+  - sugi-instance
+  - --zone=us-central1-a
+  - --command=cd my-cicd-app && git pull && npm install && npm start
+
+options:
   logging: CLOUD_LOGGING_ONLY
